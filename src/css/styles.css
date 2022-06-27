@@ -93,6 +93,10 @@ body {
   background-color: aqua;
 }
 
+/* .load-more.is-hidden {
+  display: none;
+} */
+
 .gallery {
   display: grid;
   max-width: 1140px;
