@@ -7,7 +7,7 @@ export default class ServiceAPI {
   constructor() {
     this.options = {
       params: {
-        key: '28261012-775c2e5140cc374d66361da3d;',
+        key: '25182566-6d97045846fa1b6cae2a84492',
         q: '',
         image_type: 'photo',
         orientation: 'horizontal',
