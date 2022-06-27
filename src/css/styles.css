@@ -93,9 +93,10 @@ body {
   background-color: aqua;
 }
 
-/* .load-more.is-hidden {
+.is-hidden {
   display: none;
-} */
+}
+
 
 .gallery {
   display: grid;
@@ -109,6 +110,7 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
+
 
 .photo-card {
   display: flex;
