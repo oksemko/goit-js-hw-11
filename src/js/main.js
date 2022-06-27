@@ -55,18 +55,18 @@ function loadPictures() {
     .then(dataProcessing)
     .catch(error => {
       console.log(error);
-      Notify.failure('Something went wrong, please try again...');
+      Notify.failure('Something went wrong, please try again... ⭕');
     });
 }
 
 function dataProcessing(data) {
   searchButton.disabled = false;
   if (data.data.totalHits === 0) {
-    Notify.failure('Sorry, there are no images matching your search query. Please try again.');
+    Notify.failure('Sorry, there are no images matching your search query. Please try again. 🧐');
     return;
   }
   if (data.data.totalHits !== 0 && data.data.hits.length === 0) {
-    Notify.warning(`We're sorry, but you've reached the end of search results.`);
+    Notify.warning(`We're sorry, but you've reached the end of search results. 😔`);
     return;
   }
 
@@ -75,7 +75,7 @@ function dataProcessing(data) {
   galleryLightBox.refresh();
 
   if (loadService.pageNumber === 2) {
-    Notify.info(`Hooray! We found ${data.data.totalHits} images.`);
+    Notify.info(`Hooray! We found ${data.data.totalHits} images. 🤩`);
   } else {
     const { height: cardHeight } = gallery.firstElementChild.getBoundingClientRect();
     window.scrollBy({
