@@ -55,15 +55,43 @@ body {
   cursor: pointer;
 
   background-color: lightskyblue;
+  /* transition: 0.5s; */
 }
 
 .submit-button:hover {
   background-color: aqua;
+  /* letter-spacing: 0.25em;
+  box-shadow: lightcoral; */
 }
 
 .search-icon {
   width: 22px;
   height: 22px;
+}
+
+.load-more {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0px;
+  margin-bottom: 20px;
+
+  width: 100px;
+  height: 32px;
+
+  font-size: 16px;
+
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+
+  color: #fafafa;
+  background-color: lightskyblue;
+}
+
+.load-more:hover {
+  color: blue;
+  background-color: aqua;
 }
 
 
