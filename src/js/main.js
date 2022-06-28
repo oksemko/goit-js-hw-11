@@ -9,6 +9,7 @@ import markup from './markup';
 const form = document.querySelector('.search-form');
 const searchButton = document.querySelector('[type=submit]');
 const gallery = document.querySelector('.gallery');
+const loadButton = document.querySelector('.load-more');
 
 const options = {
   simpleLightBox: {
@@ -23,8 +24,10 @@ const options = {
 };
 
 const loadService = new ServiceAPI();
+showLoadMoreButton(false);
 
 form.addEventListener('submit', onFormSubmit);
+loadButton.addEventListener('click', onLoadMore);
 
 const callback = function (entries, observer) {
   if (entries[0].isIntersecting) {
@@ -42,6 +45,7 @@ function onFormSubmit(e) {
   const isFilled = e.currentTarget.elements.searchQuery.value;
   if (isFilled) {
     searchButton.disabled = true;
+    loadButton.disabled = true;
     loadService.searchQuery = isFilled;
     loadService.resetPage();
     gallery.innerHTML = '';
@@ -63,10 +67,12 @@ function dataProcessing(data) {
   searchButton.disabled = false;
   if (data.data.totalHits === 0) {
     Notify.failure('Sorry, there are no images matching your search query. Please try again. 🧐');
+    showLoadMoreButton(false);
     return;
   }
   if (data.data.totalHits !== 0 && data.data.hits.length === 0) {
     Notify.warning(`We're sorry, but you've reached the end of search results. 😔`);
+    showLoadMoreButton(false);
     return;
   }
 
@@ -76,6 +82,7 @@ function dataProcessing(data) {
 
   if (loadService.pageNumber === 2) {
     Notify.info(`Hooray! We found ${data.data.totalHits} images. 🤩`);
+    showLoadMoreButton(true);
   } else {
     const { height: cardHeight } = gallery.firstElementChild.getBoundingClientRect();
     window.scrollBy({
@@ -84,4 +91,18 @@ function dataProcessing(data) {
     });
   }
   observer.observe(gallery.lastElementChild);
+}
+
+async function onLoadMore() {
+  try {
+    const fetchCards = await loadService.fetchCards();
+    await reviewListOfCards(fetchCards);
+    return fetchCards;
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+function showLoadMoreButton(enabled) {
+  loadButton.style.display = enabled ? 'block' : 'none';
 }
